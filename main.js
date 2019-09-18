@@ -59,8 +59,17 @@ function reduce(array, f, acc) {
 //wordLengths("hello its me") // [5,3,2]
 
 function wordLengths(str) {
-    // TODO: your code here 
+  //Split the str to array of words. 
+  var words = str.split(' '); 
+  //use map to iterate ofer the words 
+  //and return the length of every word
+  return map(words, function(word){
+    return word.length
+  })
 }
+
+//test
+wordLengths("I finish Q1"); //[1, 6, 2]
 
 //=============================================================================
 /*                                  Q2                                    */
@@ -72,7 +81,7 @@ function wordLengths(str) {
 // countOccurrences("hello, world!", "l"); // 3
 
 function countOccurrences(string, character) {
-    // your code is here
+    
 }
 
 //=============================================================================
@@ -84,7 +93,12 @@ function countOccurrences(string, character) {
 // wordsLongerThanThree("Hello Mad World") //["Hello", "World"]
 
 function wordsLongerThanThree(str) {
-    // TODO: your code here 
+  //Split the str to array of words. 
+  words = str.split(' ')
+  //use filter to iterate over the words and check if its achive the condition....
+  return filter(words, function(word){
+    return word.length > 3 ; 
+  })
 }
 
 //=============================================================================
@@ -99,7 +113,11 @@ function wordsLongerThanThree(str) {
 //repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
 
 function repeatString(str, count) { 
- // TODO: your code here 
+  if (count ===1){
+    return str; 
+  }
+  return str + repeatString(str, count-1)
+   
 } 
  
 
@@ -129,6 +147,33 @@ function repeatString(str, count) {
 // pizza.eatSlice();
 
 // Write your code here .....
+function makePizza(crust, size, numberOfSlice){
+  var ingredients = []
+  return{
+    crust: crust, 
+    size: size,
+    numberOfSlice: numberOfSlice , 
+    ingredients: ingredients,
+    addIngredients: function(ingredient){
+     ingredients.push(ingredient); 
+
+    },
+    displayIngredaints: function(){
+      return ingredients; 
+    },
+    bakePizza: function(){
+      // need timer function here 
+      // remember 
+      // remmber 
+      window.setTimeout(function(){
+        console.log("Your " + crust + " "+ size + " " + numberOfSlice + " slice pizza is done"); 
+
+      }, 2000)
+
+    }
+
+  }
+}
 
 //=============================================================================
 /*                                  Q6                                      */
@@ -153,8 +198,40 @@ d- Decrement the number of "unread" books
 */
 
 // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
+// Yes I am .....
+//Hello :D Are you enjoying ?? :D 
 
 // Write your code here .....
+function ReadingList(){
+  var readingList = {}; 
+
+  readingList.read = 0; 
+  readingList.unRead = 0; 
+  readingList.toRead = []; 
+  readingList.currentRead= ""; 
+  readingList.readBooks = []; 
+
+  readingList.AddBook = AddBook; 
+  readingList.finishCurrentBook = finishCurrentBook; 
+
+  return readingList; 
+}
+
+function AddBook(bookName){
+  this.toRead.push(bookName);
+  this.unRead++;  
+
+}
+
+function finishCurrentBook(){
+  this.readBooks.push(this.currentRead); 
+  this.currentRead = this.toRead.shift(); 
+  this.unRead--; 
+  this.read++; 
+
+
+}
+
 
 //=============================================================================
 /*                                  Q7                                       */
@@ -175,6 +252,71 @@ d- Decrement the number of "unread" books
 //  safe('money','small') => "watch gold-bar money"
 
 // Write your code here .....
+
+
+function makeSafe(limit){
+  var safe = {}; 
+  safe.limit = limit; 
+  safe.items=[]; 
+  safe.addItem= function(item, itemSize){
+    if(itemSize===  'small')
+        itemSizenum= 1; 
+      else if(itemSize=== 'medium' )
+        itemSizenum= 2; 
+      else
+        itemSizenum= 3;
+
+    if (itemSize < safe.limit){
+      safe.limit--;
+      items.push(item);  
+    }else
+    console.log("Can't fit")
+
+    if(safe.limit===0){
+    return items; 
+  }
+
+
+
+  }
+
+  return safe; 
+}
+
+
+
+
+function makeSafe(limit){
+  var items=[];
+  
+ 
+  return{
+    storageSizeLimit: limit,
+    items:items,
+    addItem: function(item, itemSize){
+      var itemSizenum; 
+      if(itemSize===  'small')
+        itemSizenum= 1; 
+      else if(itemSize=== 'medium' )
+        itemSizenum= 2; 
+      else
+        itemSizenum= 3; 
+
+
+      if (itemSize < storageSizeLimit){
+        limit = limit --;
+        items.push(item);  
+      }else
+      console.log("Can't fit")
+
+      if(storageSizeLimit===0){
+      return items; 
+    }
+    }
+    
+  }
+
+}
 
 //=============================================================================
 /*                                  Q8                                       */
